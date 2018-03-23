@@ -27,7 +27,9 @@ import pl.kwi.springboot.db.repositories.UserRepository;
 @Api(value="user", description="User operations")
 public class UserController {
 	
-	
+	private static final String API_KEY_VALUE = "123";
+	private static final String API_KEY_NAME = "API-KEY";
+
 	@Autowired
 	private UserRepository userRepository;
 	
@@ -36,7 +38,13 @@ public class UserController {
 	
 	@RequestMapping(value = "/list", method= RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value = "View a list of available users",response = List.class)
-    public ResponseEntity<List<UserEntity>> getUsers() {
+    public ResponseEntity<List<UserEntity>> getUsers(
+    		HttpServletRequest request) {
+		
+		if (!validApiKey(request)) {
+			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+		}
+		
 		return new ResponseEntity<List<UserEntity>>(userRepository.findAll(), HttpStatus.OK);
     }
 	
@@ -46,8 +54,7 @@ public class UserController {
     		@ApiParam(value = "User Id to show", defaultValue = "1") @PathVariable Long id,
     		HttpServletRequest request){
 		
-		String apiKey = request.getHeader("API-KEY");
-		if (!"123".equals(apiKey)) {
+		if (!validApiKey(request)) {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
@@ -56,24 +63,50 @@ public class UserController {
 	
 	@RequestMapping(value = "/add", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value = "Add an user")	
-    public ResponseEntity<String> addUser(@RequestBody @ApiParam(name = "User Entity", value = "User to be added") UserEntity user){
+    public ResponseEntity<String> addUser(
+    		@RequestBody @ApiParam(name = "User Entity", value = "User to be added") UserEntity user,
+    		HttpServletRequest request){
+		
+		if (!validApiKey(request)) {
+			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+		}
+		
 		userRepository.save(user);
         return new ResponseEntity<String>(gson.toJson("User saved successfully"), HttpStatus.OK);
     }
 	
 	@RequestMapping(value = "/update", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value = "Update an user")    
-    public ResponseEntity<String> updateUser(@RequestBody @ApiParam(name = "User Entity", value = "User to be updated") UserEntity user){  
+    public ResponseEntity<String> updateUser(
+    		@RequestBody @ApiParam(name = "User Entity", value = "User to be updated") UserEntity user,
+    		HttpServletRequest request){
+		
+		if (!validApiKey(request)) {
+			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+		}
+		
 		userRepository.save(user);
         return new ResponseEntity<String>(gson.toJson("User updated successfully"), HttpStatus.OK);
     }
 	
 	@RequestMapping(value="/delete/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value = "Delete an user")    
-    public ResponseEntity<String> delete(@ApiParam(value = "User Id to delete", defaultValue = "1") @PathVariable Long id){
+    public ResponseEntity<String> delete(
+    		@ApiParam(value = "User Id to delete", defaultValue = "1") @PathVariable Long id,
+    		HttpServletRequest request){
+		
+		if (!validApiKey(request)) {
+			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+		}
+		
 		userRepository.delete(id);
         return new ResponseEntity<String>(gson.toJson("User deleted successfully"), HttpStatus.OK);
  
     }
+	
+	private boolean validApiKey(HttpServletRequest request) {
+		String apiKey = request.getHeader(API_KEY_NAME);
+		return API_KEY_VALUE.equals(apiKey) ? true : false;
+	}
 
 }
