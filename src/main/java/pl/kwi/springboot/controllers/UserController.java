@@ -2,6 +2,8 @@ package pl.kwi.springboot.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -40,7 +42,15 @@ public class UserController {
 	
 	@RequestMapping(value = "/show/{id}", method= RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value = "Search a user with an ID",response = UserEntity.class)    
-    public ResponseEntity<UserEntity> showUser(@ApiParam(value = "User Id to show", defaultValue = "1") @PathVariable Long id){
+    public ResponseEntity<UserEntity> showUser(
+    		@ApiParam(value = "User Id to show", defaultValue = "1") @PathVariable Long id,
+    		HttpServletRequest request){
+		
+		String apiKey = request.getHeader("API-KEY");
+		if (!"123".equals(apiKey)) {
+			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+		}
+		
 	 	return new ResponseEntity<UserEntity>(userRepository.findOne(id), HttpStatus.OK);
     }
 	
