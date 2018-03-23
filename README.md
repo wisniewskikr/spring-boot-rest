@@ -1,5 +1,5 @@
-SPRING BOOT + REST + SWAGGER 2 + API KEY IN HEADER + SSL
-========================================================
+SPRING BOOT + REST + SWAGGER 2 + API KEY IN HEADER
+==================================================
 
 
 DESCRIPTION
@@ -13,8 +13,6 @@ Additionally service is secured by API KEY in header:
 - name: API-KEY
 - value: 123
 
-This application is also secured by SSL.
-
 Useful tools:
 - SoapUI: tool for sending REST requests.
   
@@ -26,7 +24,7 @@ To run project run class:
 Application.java
 
 Link to Swagger UI:
-https://localhost:8443/swagger-ui.html 
+http://localhost:8080/swagger-ui.html 
 
 
 ATTENTION
