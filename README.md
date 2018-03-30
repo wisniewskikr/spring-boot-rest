@@ -17,3 +17,5 @@ Application.java
 
 Link to URL:
 http://localhost:8080/hello/{name}
+or
+http://localhost:8080/spring_boot_rest-0.0.1/hello/{name}

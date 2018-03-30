@@ -14,12 +14,12 @@ public class HelloWorldController {
 	
 	@RequestMapping(value = "/")
 	public void init(HttpServletResponse response) throws IOException {
-		response.sendRedirect("/hello/Unknown");;
+		response.sendRedirect("hello/Unknown");;
 	}
 	
 	@RequestMapping(value = "/hello")
 	public void initHello(HttpServletResponse response) throws IOException {
-		response.sendRedirect("/hello/Unknown");;
+		response.sendRedirect("hello/Unknown");;
 	}
 	
 	@RequestMapping(value = "/hello/{name}")
