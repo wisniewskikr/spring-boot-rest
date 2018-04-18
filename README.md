@@ -1,4 +1,4 @@
-SPRING BOOT + REST + MUTUAL AUTHENTICATION
+SPRING BOOT + REST + X509 AUTHENTICATION
 ==========================================
 
 
@@ -6,7 +6,7 @@ DESCRIPTION
 -----------
 
 This is example project of usage Spring Boot + Rest.
-In this project mutual authentication is displayed.
+In this project x509 authentication is displayed.
   
 
 USAGE
