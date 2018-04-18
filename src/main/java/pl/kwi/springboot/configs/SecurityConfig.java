@@ -1,14 +1,20 @@
 package pl.kwi.springboot.configs;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+
+import pl.kwi.springboot.filters.CustomFilter;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+	
+	@Autowired
+	private CustomFilter filter;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -18,16 +24,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .and()
         	.httpBasic()
         .and()
+        	.addFilterBefore(filter, BasicAuthenticationFilter.class)
         	.csrf().disable();
-
-    }
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("user").password("password").roles("USER")
-            .and()
-                .withUser("manager").password("password").roles("MANAGER");
+    	
     }
 
 }
