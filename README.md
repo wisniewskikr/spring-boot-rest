@@ -1,12 +1,12 @@
-SPRING BOOT + REST + X509 AUTHENTICATION
-==========================================
+SPRING BOOT + REST + X509 AND BASIC AUTHENTICATION
+==================================================
 
 
 DESCRIPTION
 -----------
 
 This is example project of usage Spring Boot + Rest.
-In this project x509 authentication is displayed.
+In this project presents how to use x509 and basic authentication together.
   
 
 USAGE
