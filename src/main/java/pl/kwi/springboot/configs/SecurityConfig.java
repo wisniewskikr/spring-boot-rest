@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.preauth.x509.X509AuthenticationFilter;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import pl.kwi.springboot.filters.CustomFilter;
@@ -22,9 +23,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     	http.authorizeRequests()
     		.antMatchers("/**").hasRole("USER")
         .and()
-        	.httpBasic()
+        	.x509()
         .and()
-        	.addFilterBefore(filter, BasicAuthenticationFilter.class)
+        	.addFilterBefore(filter, X509AuthenticationFilter.class)
         	.csrf().disable();
     	
     }
