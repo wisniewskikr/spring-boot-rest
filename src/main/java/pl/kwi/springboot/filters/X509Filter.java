@@ -34,22 +34,28 @@ public class X509Filter extends OncePerRequestFilter {
             HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
     	
+    	if(request.getAttribute("x509") != null) {
+    		filterChain.doFilter(request, response);
+    	}
+    	
     	X509Certificate remoteCert = getRemoteCertificate(request);
     	X509Certificate localCert = getLocalCertificate();
     	
-    	System.out.println(remoteCert.equals(localCert));
+    	if (!remoteCert.equals(localCert)) {
+          throw new BadCredentialsException("X509 authentication failed");
+    	}
     	
-    	if (remoteCert.equals(localCert)) {
+    	if(request.getAttribute("basic") != null) {
         	List<GrantedAuthority> grantedAuths = new ArrayList<GrantedAuthority>();
-            grantedAuths.add(new SimpleGrantedAuthority(ROLE));
-            UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(USERNAME, PASSWORD, grantedAuths);
-            SecurityContextHolder.getContext().setAuthentication(auth);
-            filterChain.doFilter(request, response);
-        } else {
-            throw new
-              BadCredentialsException("External system authentication failed");
-        }
-        
+          grantedAuths.add(new SimpleGrantedAuthority(ROLE));
+          UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(USERNAME, PASSWORD, grantedAuths);
+          SecurityContextHolder.getContext().setAuthentication(auth);
+    	} else {
+    		request.setAttribute("x509", "TRUE");
+    	}
+    	
+    	filterChain.doFilter(request, response);
+       
     }
     
     private X509Certificate getRemoteCertificate(HttpServletRequest request) {
