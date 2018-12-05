@@ -16,15 +16,10 @@ USAGE
 To run project run class: 
 Application.java
 
-Link to local:
-https://localhost:8443/hello/{name}
+Link:
+https://localhost:8443/app/hello/{name}
 example:
-https://localhost:8443/hello/Chris
-
-Link to Tomcat:
-https://localhost:8443/spring_boot_rest-0.0.1/hello/{name}
-example:
-https://localhost:8443/spring_boot_rest-0.0.1/hello/Chris
+https://localhost:8443/app/hello/Chris
 
 Basic authentication:
 user/password
