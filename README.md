@@ -1,5 +1,5 @@
-SPRING BOOT + REST + SIMPLE + CUSTOM AUTHENTICATION PROVIDER
-============================================================
+SPRING BOOT + REST + CUSTOM AUTHENTICATION PROVIDER
+===================================================
 
 
 DESCRIPTION
@@ -8,6 +8,8 @@ DESCRIPTION
 This is example project of usage Spring Boot + Rest.
 This is the simplest possible application return "Hello World" + name.
 It shows how custom authentication provider works.
+
+Authentication Provider checks if credential are ok.
   
 
 USAGE
@@ -16,15 +18,10 @@ USAGE
 To run project run class: 
 Application.java
 
-Link to local:
-http://localhost:8080/hello/{name}
+Link:
+http://localhost:8080/app/hello/{name}
 example:
-http://localhost:8080/hello/Chris
-
-Link to Tomcat:
-http://localhost:8080/spring_boot_rest-0.0.1/hello/{name}
-example:
-http://localhost:8080/spring_boot_rest-0.0.1/hello/Chris
+http://localhost:8080/app/hello/Chris
 
 Basic authentication:
 user/password
