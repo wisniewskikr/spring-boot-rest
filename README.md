@@ -1,5 +1,5 @@
-SPRING BOOT + REST + BASIC AUTHENTICATION
-==================================================
+SPRING BOOT + REST + BASIC AUTHENTICATION + EXCEPTION HANDLING
+==============================================================
 
 
 DESCRIPTION
@@ -8,6 +8,9 @@ DESCRIPTION
 This is example project of usage Spring Boot + Rest.
 This is the simplest possible application return "Hello World" + name.
 It shows how basic authentication works.
+
+Exception handling is connected with access denied. User is logged in but 
+does not have permission for specific resource.
   
 
 USAGE
