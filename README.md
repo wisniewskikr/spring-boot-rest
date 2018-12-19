@@ -1,5 +1,5 @@
-SPRING BOOT + REST + BASIC AUTHENTICATION
-==================================================
+SPRING BOOT + REST + BASIC AUTHENTICATION + USER DETAILS SERVICE
+================================================================
 
 
 DESCRIPTION
@@ -8,6 +8,13 @@ DESCRIPTION
 This is example project of usage Spring Boot + Rest.
 This is the simplest possible application return "Hello World" + name.
 It shows how basic authentication works.
+
+UserDetailsService creates new user basic on his username. Creates:
+- username
+- password
+- roles
+ In other words it replaces configure(AuthenticationManagerBuilder auth)
+ basing on username.
   
 
 USAGE
