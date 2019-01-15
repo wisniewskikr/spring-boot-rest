@@ -1,5 +1,5 @@
-SPRING BOOT + REST + BASIC AUTHENTICATION
-==================================================
+SPRING BOOT + REST + BASIC AUTHENTICATION + MULTIPLE
+====================================================
 
 
 DESCRIPTION
@@ -8,6 +8,8 @@ DESCRIPTION
 This is example project of usage Spring Boot + Rest.
 This is the simplest possible application return "Hello World" + name.
 It shows how basic authentication works.
+
+Example of multiple Basic Authentication.
   
 
 USAGE
@@ -20,6 +22,12 @@ Link:
 http://localhost:8080/app/hello/{name}
 example:
 http://localhost:8080/app/hello/Chris
-
-Basic authentication:
+authentication:
 user/password
+
+Link:
+http://localhost:8080/app/welcome/{name}
+example:
+http://localhost:8080/app/welcome/Chris
+authentication:
+admin/password

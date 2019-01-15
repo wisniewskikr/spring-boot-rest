@@ -10,17 +10,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-public class HelloWorldController {
+public class WelcomeController {
 			
-	@RequestMapping(value = "/hello")
-	public void initHello(HttpServletResponse response) throws IOException {
-		response.sendRedirect("hello/Unknown");;
+	@RequestMapping(value = "/welcome")
+	public void initWelcome(HttpServletResponse response) throws IOException {
+		response.sendRedirect("welcome/Unknown");;
 	}
 	
-	@RequestMapping(value = "/hello/{name}")
-	public String sayHelloWorld(@PathVariable("name") String name) {
+	@RequestMapping(value = "/welcome/{name}")
+	public String sayWelcome(@PathVariable("name") String name) {
 		name = (name == null) ? "Unknown" : name;
-		return "Hello World " + name;
+		return "Welcome " + name;
 	}
 
 }
